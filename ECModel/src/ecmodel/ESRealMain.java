@@ -9,6 +9,7 @@ import metodo.ESReal;
 import problema.Problema;
 import problema.ProblemaDeJong;
 import problema.ProblemaRastrigin;
+import problema.ProblemaSchwefel;
 import solucao.Individuo;
 
 public class ESRealMain {
@@ -16,18 +17,22 @@ public class ESRealMain {
 	
 public static void main(String[] args) {
 	
-	Double minimo = -5.12;
-	Double maximo = 5.12;
-	Integer nVariaveis = 100;
-	Problema problema = new ProblemaRastrigin(nVariaveis);
+	Double minimo = -500.0;
+	Double maximo = 500.0;
+	Integer nVariaveis = 50;
+	Problema problema = new ProblemaSchwefel(nVariaveis);
 	
 	int mutacao = 0;
 	
 	// Parâmetros - ES
-	Integer mu = 20; // Tamanho da populacao
-	Integer lambda = 100; // numero de descendentes
+	Integer mu = 100; // Tamanho da populacao
+	Integer lambda = 10000; // numero de descendentes
 	Integer geracoes = 300; // criterio de parada
 	Double pMutacao = 0.0; // mutacao - aplicacao ao descendente - variacao/pertubacao
+	
+	// Parametros - DE
+	 double F = 0.1;
+     double Cr = 0.9;
 	
 	   int repeticoes = 30;
        
@@ -50,30 +55,34 @@ public static void main(String[] args) {
                switch (teste) {
 
                    case 1: // Mutação Uniforme
-                	   mu = 20; // Tamanho da populacao
-                	   lambda = 100; // numero de descendentes
-                	   pMutacao = 0.02; // mutacao - aplicacao ao descendente - variacao/pertubacao
+                	  mu = 100; // Tamanho da populacao
+                	  lambda  = 5000; // numero de descendentes a
+                	   pMutacao = 0.7; // mutacao - aplicacao ao descendente - variacao/pertubacao
+                		  F = 0.1;
+                		  Cr = 0.9;
                 	   mutacao = 1;
                        break;
 
-                   case 2: // Mutação por Variaveis
-                	   mu = 20; // Tamanho da populacao
-                	   lambda = 100 ; // numero de descendentes
-                	   pMutacao = 0.02; // mutacao - aplicacao ao descendente - variacao/pertubacao
+                   case 2: // Mutação por Variaveis           
+                		 mu = 100; // Tamanho da populacao
+                		lambda = 10000; // numero de descendentes
+                	   pMutacao = 0.2; // mutacao - aplicacao ao descendente - variacao/pertubacao
+                	   F = 1.0;
+             		  	Cr = 0.2;
                 	   mutacao = 2;
                        break;
  
 
                }
         
-               ESReal esReal  = new ESReal(minimo, maximo, nVariaveis, problema, mu, lambda, geracoes, pMutacao , mutacao);
+               ESReal esReal  = new ESReal(minimo, maximo, nVariaveis, problema, mu, lambda, geracoes, pMutacao , mutacao,F,Cr);
                    result = esReal.executar().getFuncaoObjetivo();
 //               }
 
                long endTime = System.currentTimeMillis();
                long totalTime = endTime - startTime;
 
-               System.out.println(nomes.get(teste - 1) + ";" + i + ";" + result + ";" + "Pior" + ";"  + esReal.piorResultado + ";" + "tempo" + ";" +   totalTime);
+               System.out.println(  i + ";" + result +   ";" +   totalTime);
                System.out.flush();
 
            }
