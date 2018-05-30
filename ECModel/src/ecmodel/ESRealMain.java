@@ -49,16 +49,16 @@ public static void main(String[] args) {
 
                switch (teste) {
 
-                   case 1:
+                   case 1: // Mutação Uniforme
                 	   mu = 20; // Tamanho da populacao
                 	   lambda = 100; // numero de descendentes
                 	   pMutacao = 0.02; // mutacao - aplicacao ao descendente - variacao/pertubacao
                 	   mutacao = 1;
                        break;
 
-                   case 2:
+                   case 2: // Mutação por Variaveis
                 	   mu = 20; // Tamanho da populacao
-                	   lambda = 300 ; // numero de descendentes
+                	   lambda = 100 ; // numero de descendentes
                 	   pMutacao = 0.02; // mutacao - aplicacao ao descendente - variacao/pertubacao
                 	   mutacao = 2;
                        break;

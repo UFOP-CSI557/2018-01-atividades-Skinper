@@ -154,21 +154,30 @@ public class ESReal implements Metodo {
         for (int i = 0; i < individuo.getCromossomos().size(); i++) {
             if (rnd.nextDouble() <= this.pMutacao) {
             	
-                // Mutacao aritmetica
-                // Multiplicar rnd e inverter ou nao o sinal
-                Double valor = (Double) individuo.getCromossomos().get(i);
+                // Mutacao Uniforme
+            	int n = rnd.nextInt(individuo.getCromossomos().size());
+            	int n2 = rnd.nextInt(individuo.getCromossomos().size());
+         
+            	
+               
+                Double valor = (Double) individuo.getCromossomos().get(n);
                 // Multiplica por rnd
-                valor *= Math.random();
+                valor *= rnd.nextDouble();
                 
-                // Inverter o sinal
-                if (!rnd.nextBoolean()) {
-                    valor = -valor;
- 
-                }
+                Double valor2 = (Double) individuo.getCromossomos().get(n2);
+                // Multiplica por rnd
+                valor2 *= rnd.nextDouble();
+           
 
                 if (valor >= this.minimo
                         && valor <= this.maximo) {
                     individuo.getCromossomos().set(i, valor);
+
+                }
+                
+                if (valor2 >= this.minimo
+                        && valor2 <= this.maximo) {
+                    individuo.getCromossomos().set(i, valor2);
 
                 }
 
